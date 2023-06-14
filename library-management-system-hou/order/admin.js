@@ -46,7 +46,26 @@ router.post('/changeBorrowInfo', (req, res) => {
             }
         })
 })
-//
+router.post('/deleteborrow', (req, res) => {
+    let data = req.body
+    conn.query(`delete from borrow
+                where readerId = '${data.readerId}'
+                  and bookId = '${data.bookId}'
+                  and borrowDate = '${data.borrowDate}'`,
+        (err, result) => {
+            if (err) {
+                res.send({
+                    status: 0,
+                    msg: '删除失败！',
+                });
+            } else {
+                res.send({
+                    status: 200,
+                    msg: '删除成功！',
+                });
+            }
+        })
+})
 // 管理员通过名称查询借阅信息
 router.post('/searchborrow', (req, res) => {
     let data = req.body;
