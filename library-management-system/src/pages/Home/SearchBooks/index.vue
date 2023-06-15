@@ -111,6 +111,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValue: row.bookName,
+        inputValidator: value => {if (value=="")return false;return true;},
       })
         .then(({ value }) => {
           this.$message({
@@ -145,6 +146,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValue: row.author,
+        inputValidator: value => {if (value=="")return false;return true;},
       })
         .then(({ value }) => {
           this.$message({
@@ -179,6 +181,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValue: row.position,
+        inputValidator: value => {if (value=="")return false;return true;},
       })
         .then(({ value }) => {
           // 修改的信息
@@ -220,6 +223,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValue: row.amount,
+        inputValidator: value => {if (value=="")return false;return true;},
       })
         .then(({ value }) => {
           this.$message({

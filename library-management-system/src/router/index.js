@@ -54,12 +54,6 @@ export default new VueRouter({
           path: 'adminmanageadmin',
           component: AdminManageAdmin
         },
-        // // 管理员
-        // {
-        //   // 管理员管理
-        //   path: 'admin',
-        //   component: AdminEditAdmin
-        // },
         {
           // 管理员管理借阅记录
           path: 'adminborrows',
