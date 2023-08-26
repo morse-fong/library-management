@@ -11,7 +11,7 @@ const reader = require('./order/reader.js')
 app.use(admin)
 app.use(reader)
 checkS = function(str){
-    // 判断字符串是否为数字和字母组合
+    // 判断字符串是否为数字和字母下划线组合
     var zg = /^\w+$/;
     if (zg.test(str)) {
         return false;
@@ -55,23 +55,24 @@ app.post('/login', (req, res) => {
     }
     if (checkS(data.password)) {
         res.json({
-            msg: '密码仅能由数字及字母构成',
+            msg: '密码仅能由字母数字及下划线构成',
             status: 0
         })
         return false;
     }if (checkS(data.phone)) {
         res.json({
-            msg: '账号仅能由数字及字母构成',
+            msg: '账号仅能由字母数字及下划线构成',
             status: 0
         })
         return false;
     }
     // 管理员：
     if (data.isAdmin == 'true') {
+        let AdminLoginPwd = encrypt(data.password)
         conn.query(`select *
                     from admin
                     where id = '${data.phone}'
-                      and password = '${data.password}'`, (err, rs) => {
+                      and password = '${AdminLoginPwd}'`, (err, rs) => {
             if (err) throw err;
             if (rs.length > 0) {
                 res.json({

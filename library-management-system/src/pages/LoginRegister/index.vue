@@ -164,7 +164,7 @@ export default {
           this.registerloading = false
           this.$message({
             showClose: true,
-            message: '注册失败！',
+            message: res.msg,
             type: 'error',
           });
         }

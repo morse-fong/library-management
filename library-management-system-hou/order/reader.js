@@ -9,7 +9,15 @@ const { encrypt,decrypt  } = require("../js/encrypt.js");
 
 var bodyParser = require('body-parser')
 router.use(bodyParser.urlencoded({ extended: false}))
-
+checkS = function(str){
+	// 判断字符串是否为数字和字母下划线组合
+	var zg = /^\w+$/;
+	if (zg.test(str)) {
+		return false;
+	} else {
+		return true;
+	}
+}
 // 重新获取学生信息
 router.post('/initreader',(req,res)=>{
 	let data = req.body
@@ -56,6 +64,13 @@ router.post('/register', (req, res) => {
       })
       return false;
     }
+	if (checkS(data.userName)) {
+		res.json({
+			msg: '用户名仅能由字母数字及下划线构成',
+			status: 0
+		})
+		return false;
+	}
     // 电话号码非空校验
     if (!data.phone) {
       res.json({
@@ -80,6 +95,13 @@ router.post('/register', (req, res) => {
       })
       return false;
     }
+	if (checkS(data.password)) {
+		res.json({
+			msg: '密码仅能由字母数字及下划线构成',
+			status: 0
+		})
+		return false;
+	}
     // 随机用户ID
     let readerId = nanoid();
     //   单向散列55524加密密码
@@ -101,6 +123,7 @@ router.post('/register', (req, res) => {
 		})
 		return false;
 	}
+
     conn.query(`select * from reader where phone='${data.phone}'`, (err, rs) => {
       if (err) throw err;
       // 注册前先校验该用户是否已经注册过
