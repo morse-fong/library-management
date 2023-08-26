@@ -164,7 +164,7 @@ export default {
           this.registerloading = false
           this.$message({
             showClose: true,
-            message: res.msg,
+            message: '注册失败！',
             type: 'error',
           });
         }
@@ -196,7 +196,6 @@ export default {
         isAdmin: this.isAdmin
       }
       login(qs.stringify(data)).then(res => {
-        console.log(res);
         if (res.status == 200) {
           this.loginMsg.phone = ''
           this.loginMsg.pwd = ''
@@ -211,13 +210,14 @@ export default {
           this.$store.dispatch('initBooksList')
           this.$router.push('/home')
         } else {
+          // console.log(res.msg)
           this.loginloading = false
           this.loginMsg.phone = ''
           this.loginMsg.pwd = ''
           this.loginloading = false
           this.$message({
             showClose: true,
-            message: '登录失败！',
+            message: res.msg,
             type: 'error',
           });
         }

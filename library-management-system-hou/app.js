@@ -10,7 +10,15 @@ const admin = require('./order/admin.js')
 const reader = require('./order/reader.js')
 app.use(admin)
 app.use(reader)
-
+checkS = function(str){
+    // 判断字符串是否为数字和字母组合
+    var zg = /^\w+$/;
+    if (zg.test(str)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 // 公共接口
 // console.log(conn);
 // 登录接口
@@ -45,6 +53,19 @@ app.post('/login', (req, res) => {
         })
         return false;
     }
+    if (checkS(data.password)) {
+        res.json({
+            msg: '密码仅能由数字及字母构成',
+            status: 0
+        })
+        return false;
+    }if (checkS(data.phone)) {
+        res.json({
+            msg: '账号仅能由数字及字母构成',
+            status: 0
+        })
+        return false;
+    }
     // 管理员：
     if (data.isAdmin == 'true') {
         conn.query(`select *
@@ -67,8 +88,6 @@ app.post('/login', (req, res) => {
             }
         })
     } else {
-
-
         // 电话号码格式验证
         const regexp = /^(\+\d{2,3}-)?\d{11}$/;
         if (!regexp.test(data.phone)) {
