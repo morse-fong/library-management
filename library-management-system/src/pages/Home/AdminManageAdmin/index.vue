@@ -29,7 +29,7 @@
       <!-- ...已有的表格列... -->
       <el-table-column prop="id" label="用户名" sortable width=220>
       </el-table-column>
-      <el-table-column prop="password" sortable label="密码" width=220>
+      <el-table-column prop="password" sortable label="密码(已加密）" width=220>
       </el-table-column>
 
       <el-table-column label="操作">

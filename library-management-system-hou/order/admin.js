@@ -6,6 +6,7 @@ router.use(bodyParser.urlencoded({extended: false}))
 const nodemailer = require("nodemailer");
 const {nanoid} = require('nanoid')
 const {encrypt} = require("../js/encrypt");
+
 // 管理员获取借阅记录接口
 router.post('/borrowslist', (req, res) => {
     conn.query(`select *
@@ -241,8 +242,9 @@ router.post('/deladmin', (req, res) => {
 //管理员修改管理员信息
 router.post('/changeadmininfo', (req, res) => {
     let data = req.body;
+    let adminPwd = encrypt(data.password)
     conn.query(`update admin
-                set password='${data.password}'
+                set password='${adminPwd}'
                 where id = '${data.id}'`,
         (err, result) => {
             if (err) {
@@ -420,6 +422,7 @@ router.post('/adminaddpersons', (req, res) => {
 
 router.post('/adminaddadmins', (req, res) => {
     let data = req.body
+    let adminRegisterPwd = encrypt(data.password)
     conn.query(`select *
                 from admin
                 where id = '${data.id}'`, (err, rs) => {
@@ -430,7 +433,7 @@ router.post('/adminaddadmins', (req, res) => {
             })
         } else {
             conn.query(`insert into admin
-                        values ('${data.id}', '${data.password}')`)
+                        values ('${data.id}', '${adminRegisterPwd}')`)
             res.send({
                 msg: '添加管理员成功！',
                 status: 200
@@ -561,7 +564,7 @@ router.post('/alertperson', (req, res) => {
             from: userEmail, // 发送者QQ邮箱
             to: `${email}`, // 接收者QQ邮箱
             subject: "举报反馈",
-            text: `读者您好，请尽快归还书籍:${data.bookName}！`, // plain text body [与 html 只能有一个]
+            text: `再不还:${data.bookName}，你押金就是我的了！`, // plain text body [与 html 只能有一个]
             //html: "<b>Hello world?</b>" // html body
         }
         transporter.sendMail(mailobj, (err, data) => {

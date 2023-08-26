@@ -22,17 +22,17 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
   `id` varchar(50)   NOT NULL,
-  `password` varchar(20)   NOT NULL,
+  `password` varchar(50)   NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1   ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('sf', '123');
-INSERT INTO `admin` VALUES ('gy', '123');
-INSERT INTO `admin` VALUES ('wy', '123');
-INSERT INTO `admin` VALUES ('zy', '123');
+INSERT INTO `admin` VALUES ('sf', '54ba8d5e0d46135e707484acd432835f');
+INSERT INTO `admin` VALUES ('gy', '54ba8d5e0d46135e707484acd432835f');
+INSERT INTO `admin` VALUES ('wy', '54ba8d5e0d46135e707484acd432835f');
+INSERT INTO `admin` VALUES ('zy', '54ba8d5e0d46135e707484acd432835f');
 
 -- ----------------------------
 -- Table structure for book
@@ -116,7 +116,7 @@ CREATE TABLE `reader`  (
 -- ----------------------------
 -- Records of reader
 -- ----------------------------
-INSERT INTO `reader` VALUES ('CVtkXPx5BEFMZ3eydcU5R', '甲', '675a3867bd36ed867d480551c1000dc4', '13036255989', 0, 0, '2387736781@qq.com');
-INSERT INTO `reader` VALUES ('esRdxiau60yQklZtGxiix', '乙', '675a3867bd36ed867d480551c1000dc4', '13036275999', 0, 0, '2943223781@qq.com');
+INSERT INTO `reader` VALUES ('CVtkXPx5BEFMZ3eydcU5R', 'usera', '54ba8d5e0d46135e707484acd432835f', '12312312312', 0, 0, '12312312312@qq.com');
+INSERT INTO `reader` VALUES ('esRdxiau60yQklZtGxiix', 'userb', '54ba8d5e0d46135e707484acd432835f', '12312312312', 0, 0, '12312312312@qq.com');
 
 SET FOREIGN_KEY_CHECKS = 1;
